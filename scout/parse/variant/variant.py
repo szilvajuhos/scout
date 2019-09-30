@@ -137,10 +137,11 @@ def parse_variant(variant, case, variant_type='clinical',
 
     ################# Add gt calls #################
     if individual_positions and case['individuals']:
-        parsed_variant['samples'] = parse_genotypes(variant, case['individuals'],
-                                                    individual_positions)
+      is_cancer = category == 'cancer'
+      parsed_variant['samples'] = parse_genotypes(variant, case['individuals'], 
+                                                  individual_positions, is_cancer)
     else:
-        parsed_variant['samples'] = []
+      parsed_variant['samples'] = []
 
     ################# Add compound information #################
     compounds = parse_compounds(compound_info=variant.INFO.get('Compounds'),
